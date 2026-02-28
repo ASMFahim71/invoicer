@@ -20,7 +20,7 @@ export default async function DashboardLayout({
   });
 
   return (
-    <div className="min-h-screen bg-neutral-950">
+    <div className="min-h-dvh bg-neutral-950">
       <Navbar
         userEmail={user.email ?? null}
         agencyName={dbUser?.agencyName ?? null}
