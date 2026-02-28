@@ -24,10 +24,11 @@ export const invoiceFormSchema = z.object({
   items: z.array(lineItemSchema).min(1, "At least one line item is required"),
 });
 
-export type InvoiceFormValues = z.infer<typeof invoiceFormSchema>;
+export type InvoiceFormInput = z.input<typeof invoiceFormSchema>;
+export type InvoiceFormValues = z.output<typeof invoiceFormSchema>;
 
 interface InvoiceFormProps {
-  defaultValues?: Partial<InvoiceFormValues>;
+  defaultValues?: Partial<InvoiceFormInput>;
   defaultCurrency?: string;
   invoiceId?: string;
   mode: "create" | "edit";
@@ -42,7 +43,7 @@ export function InvoiceForm({ defaultValues, defaultCurrency, invoiceId, mode }:
     handleSubmit,
     watch,
     formState: { errors, isSubmitting },
-  } = useForm<InvoiceFormValues>({
+  } = useForm<InvoiceFormInput, unknown, InvoiceFormValues>({
     resolver: zodResolver(invoiceFormSchema),
     defaultValues: {
       currency: defaultCurrency ?? "USD",
