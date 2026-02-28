@@ -20,6 +20,13 @@ interface InvoiceActionsProps {
   status: InvoiceStatus;
 }
 
+function getErrorMessage(data: unknown): string | null {
+  if (!data || typeof data !== "object") return null;
+
+  const maybeError = (data as Record<string, unknown>).error;
+  return typeof maybeError === "string" ? maybeError : null;
+}
+
 export function InvoiceActions({
   invoiceId,
   invoiceToken,
@@ -44,8 +51,8 @@ export function InvoiceActions({
     setSending(false);
 
     if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      alert((err as { error?: string }).error ?? "Failed to send invoice");
+      const err: unknown = await res.json().catch(() => null);
+      alert(getErrorMessage(err) ?? "Failed to send invoice");
       return;
     }
 

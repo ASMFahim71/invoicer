@@ -34,6 +34,13 @@ interface InvoiceFormProps {
   mode: "create" | "edit";
 }
 
+function getErrorMessage(data: unknown): string | null {
+  if (!data || typeof data !== "object") return null;
+
+  const maybeError = (data as Record<string, unknown>).error;
+  return typeof maybeError === "string" ? maybeError : null;
+}
+
 export function InvoiceForm({ defaultValues, defaultCurrency, invoiceId, mode }: InvoiceFormProps) {
   const router = useRouter();
 
@@ -60,7 +67,7 @@ export function InvoiceForm({ defaultValues, defaultCurrency, invoiceId, mode }:
 
   const watchItems = watch("items");
   const watchTax = watch("taxPercent");
-  const watchCurrency = watch("currency") || "USD";
+  const watchCurrency = watch("currency") ?? "USD";
 
   const subtotal = watchItems?.reduce((sum, item) => {
     const qty = Number(item.quantity) || 0;
@@ -83,8 +90,8 @@ export function InvoiceForm({ defaultValues, defaultCurrency, invoiceId, mode }:
     });
 
     if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      alert((err as { error?: string }).error ?? "Something went wrong");
+      const err: unknown = await res.json().catch(() => null);
+      alert(getErrorMessage(err) ?? "Something went wrong");
       return;
     }
 

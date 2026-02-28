@@ -7,6 +7,13 @@ interface AcceptButtonProps {
   token: string;
 }
 
+function getErrorMessage(data: unknown): string | null {
+  if (!data || typeof data !== "object") return null;
+
+  const maybeError = (data as Record<string, unknown>).error;
+  return typeof maybeError === "string" ? maybeError : null;
+}
+
 export function AcceptButton({ token }: AcceptButtonProps) {
   const [loading, setLoading] = useState(false);
   const [accepted, setAccepted] = useState(false);
@@ -23,8 +30,8 @@ export function AcceptButton({ token }: AcceptButtonProps) {
     setLoading(false);
 
     if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      setError((data as { error?: string }).error ?? "Something went wrong");
+      const data: unknown = await res.json().catch(() => null);
+      setError(getErrorMessage(data) ?? "Something went wrong");
       return;
     }
 
