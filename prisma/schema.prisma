@@ -35,7 +35,9 @@ model Invoice {
     token         String        @unique @default(uuid())
     taxPercent    Decimal       @default(0) @db.Decimal(5, 2)
     dueDate       DateTime?
-    acceptedAt    DateTime?
+    acceptedAt            DateTime?
+    senderAgreementEmail  String?
+    clientAgreementEmail  String?
     userId        String
     user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
     items         LineItem[]

@@ -2251,6 +2251,8 @@ export namespace Prisma {
     taxPercent: Decimal | null
     dueDate: Date | null
     acceptedAt: Date | null
+    senderAgreementEmail: string | null
+    clientAgreementEmail: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2269,6 +2271,8 @@ export namespace Prisma {
     taxPercent: Decimal | null
     dueDate: Date | null
     acceptedAt: Date | null
+    senderAgreementEmail: string | null
+    clientAgreementEmail: string | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2287,6 +2291,8 @@ export namespace Prisma {
     taxPercent: number
     dueDate: number
     acceptedAt: number
+    senderAgreementEmail: number
+    clientAgreementEmail: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -2315,6 +2321,8 @@ export namespace Prisma {
     taxPercent?: true
     dueDate?: true
     acceptedAt?: true
+    senderAgreementEmail?: true
+    clientAgreementEmail?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -2333,6 +2341,8 @@ export namespace Prisma {
     taxPercent?: true
     dueDate?: true
     acceptedAt?: true
+    senderAgreementEmail?: true
+    clientAgreementEmail?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -2351,6 +2361,8 @@ export namespace Prisma {
     taxPercent?: true
     dueDate?: true
     acceptedAt?: true
+    senderAgreementEmail?: true
+    clientAgreementEmail?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -2456,6 +2468,8 @@ export namespace Prisma {
     taxPercent: Decimal
     dueDate: Date | null
     acceptedAt: Date | null
+    senderAgreementEmail: string | null
+    clientAgreementEmail: string | null
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -2493,6 +2507,8 @@ export namespace Prisma {
     taxPercent?: boolean
     dueDate?: boolean
     acceptedAt?: boolean
+    senderAgreementEmail?: boolean
+    clientAgreementEmail?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2514,6 +2530,8 @@ export namespace Prisma {
     taxPercent?: boolean
     dueDate?: boolean
     acceptedAt?: boolean
+    senderAgreementEmail?: boolean
+    clientAgreementEmail?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2533,6 +2551,8 @@ export namespace Prisma {
     taxPercent?: boolean
     dueDate?: boolean
     acceptedAt?: boolean
+    senderAgreementEmail?: boolean
+    clientAgreementEmail?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2552,12 +2572,14 @@ export namespace Prisma {
     taxPercent?: boolean
     dueDate?: boolean
     acceptedAt?: boolean
+    senderAgreementEmail?: boolean
+    clientAgreementEmail?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type InvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceNumber" | "status" | "clientName" | "clientEmail" | "projectTitle" | "notes" | "currency" | "token" | "taxPercent" | "dueDate" | "acceptedAt" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
+  export type InvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceNumber" | "status" | "clientName" | "clientEmail" | "projectTitle" | "notes" | "currency" | "token" | "taxPercent" | "dueDate" | "acceptedAt" | "senderAgreementEmail" | "clientAgreementEmail" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
   export type InvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     items?: boolean | Invoice$itemsArgs<ExtArgs>
@@ -2589,6 +2611,8 @@ export namespace Prisma {
       taxPercent: Prisma.Decimal
       dueDate: Date | null
       acceptedAt: Date | null
+      senderAgreementEmail: string | null
+      clientAgreementEmail: string | null
       userId: string
       createdAt: Date
       updatedAt: Date
@@ -3029,6 +3053,8 @@ export namespace Prisma {
     readonly taxPercent: FieldRef<"Invoice", 'Decimal'>
     readonly dueDate: FieldRef<"Invoice", 'DateTime'>
     readonly acceptedAt: FieldRef<"Invoice", 'DateTime'>
+    readonly senderAgreementEmail: FieldRef<"Invoice", 'String'>
+    readonly clientAgreementEmail: FieldRef<"Invoice", 'String'>
     readonly userId: FieldRef<"Invoice", 'String'>
     readonly createdAt: FieldRef<"Invoice", 'DateTime'>
     readonly updatedAt: FieldRef<"Invoice", 'DateTime'>
@@ -4606,6 +4632,8 @@ export namespace Prisma {
     taxPercent: 'taxPercent',
     dueDate: 'dueDate',
     acceptedAt: 'acceptedAt',
+    senderAgreementEmail: 'senderAgreementEmail',
+    clientAgreementEmail: 'clientAgreementEmail',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -4822,6 +4850,8 @@ export namespace Prisma {
     taxPercent?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
     acceptedAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    senderAgreementEmail?: StringNullableFilter<"Invoice"> | string | null
+    clientAgreementEmail?: StringNullableFilter<"Invoice"> | string | null
     userId?: StringFilter<"Invoice"> | string
     createdAt?: DateTimeFilter<"Invoice"> | Date | string
     updatedAt?: DateTimeFilter<"Invoice"> | Date | string
@@ -4842,6 +4872,8 @@ export namespace Prisma {
     taxPercent?: SortOrder
     dueDate?: SortOrderInput | SortOrder
     acceptedAt?: SortOrderInput | SortOrder
+    senderAgreementEmail?: SortOrderInput | SortOrder
+    clientAgreementEmail?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4865,6 +4897,8 @@ export namespace Prisma {
     taxPercent?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
     acceptedAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    senderAgreementEmail?: StringNullableFilter<"Invoice"> | string | null
+    clientAgreementEmail?: StringNullableFilter<"Invoice"> | string | null
     userId?: StringFilter<"Invoice"> | string
     createdAt?: DateTimeFilter<"Invoice"> | Date | string
     updatedAt?: DateTimeFilter<"Invoice"> | Date | string
@@ -4885,6 +4919,8 @@ export namespace Prisma {
     taxPercent?: SortOrder
     dueDate?: SortOrderInput | SortOrder
     acceptedAt?: SortOrderInput | SortOrder
+    senderAgreementEmail?: SortOrderInput | SortOrder
+    clientAgreementEmail?: SortOrderInput | SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -4911,6 +4947,8 @@ export namespace Prisma {
     taxPercent?: DecimalWithAggregatesFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     dueDate?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
     acceptedAt?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
+    senderAgreementEmail?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    clientAgreementEmail?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
     userId?: StringWithAggregatesFilter<"Invoice"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
@@ -5060,6 +5098,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutInvoicesInput
@@ -5079,6 +5119,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5098,6 +5140,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutInvoicesNestedInput
@@ -5117,6 +5161,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5136,6 +5182,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -5154,6 +5202,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5171,6 +5221,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -5424,6 +5476,8 @@ export namespace Prisma {
     taxPercent?: SortOrder
     dueDate?: SortOrder
     acceptedAt?: SortOrder
+    senderAgreementEmail?: SortOrder
+    clientAgreementEmail?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5446,6 +5500,8 @@ export namespace Prisma {
     taxPercent?: SortOrder
     dueDate?: SortOrder
     acceptedAt?: SortOrder
+    senderAgreementEmail?: SortOrder
+    clientAgreementEmail?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5464,6 +5520,8 @@ export namespace Prisma {
     taxPercent?: SortOrder
     dueDate?: SortOrder
     acceptedAt?: SortOrder
+    senderAgreementEmail?: SortOrder
+    clientAgreementEmail?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -5945,6 +6003,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: LineItemCreateNestedManyWithoutInvoiceInput
@@ -5963,6 +6023,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     items?: LineItemUncheckedCreateNestedManyWithoutInvoiceInput
@@ -6010,6 +6072,8 @@ export namespace Prisma {
     taxPercent?: DecimalFilter<"Invoice"> | Decimal | DecimalJsLike | number | string
     dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
     acceptedAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    senderAgreementEmail?: StringNullableFilter<"Invoice"> | string | null
+    clientAgreementEmail?: StringNullableFilter<"Invoice"> | string | null
     userId?: StringFilter<"Invoice"> | string
     createdAt?: DateTimeFilter<"Invoice"> | Date | string
     updatedAt?: DateTimeFilter<"Invoice"> | Date | string
@@ -6135,6 +6199,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutInvoicesInput
@@ -6153,6 +6219,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -6187,6 +6255,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutInvoicesNestedInput
@@ -6205,6 +6275,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -6223,6 +6295,8 @@ export namespace Prisma {
     taxPercent?: Decimal | DecimalJsLike | number | string
     dueDate?: Date | string | null
     acceptedAt?: Date | string | null
+    senderAgreementEmail?: string | null
+    clientAgreementEmail?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6240,6 +6314,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: LineItemUpdateManyWithoutInvoiceNestedInput
@@ -6258,6 +6334,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     items?: LineItemUncheckedUpdateManyWithoutInvoiceNestedInput
@@ -6276,6 +6354,8 @@ export namespace Prisma {
     taxPercent?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    senderAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    clientAgreementEmail?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

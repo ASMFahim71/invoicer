@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { createClient } from "~/lib/supabase/server";
 import { db } from "~/server/db";
+import { sendInvoiceSentEmail } from "~/lib/email";
+import { calculateSubtotal, calculateTotal, formatCurrency } from "~/lib/utils";
 
 export async function POST(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const supabase = await createClient();
@@ -19,6 +21,10 @@ export async function POST(
 
   const invoice = await db.invoice.findFirst({
     where: { id, userId: user.id },
+    include: {
+      user: { select: { email: true, name: true, agencyName: true } },
+      items: true,
+    },
   });
 
   if (!invoice) {
@@ -34,8 +40,28 @@ export async function POST(
 
   const updated = await db.invoice.update({
     where: { id },
-    data: { status: "SENT" },
+    data: {
+      status: "SENT",
+      senderAgreementEmail: invoice.user.email,
+    },
   });
+
+  const origin = new URL(request.url).origin;
+  const subtotal = calculateSubtotal(
+    invoice.items.map((i) => ({ quantity: i.quantity, unitPrice: i.unitPrice.toString() })),
+  );
+  const total = calculateTotal(subtotal, parseFloat(invoice.taxPercent.toString()));
+  const senderName = invoice.user.agencyName ?? invoice.user.name ?? invoice.user.email;
+
+  sendInvoiceSentEmail({
+    clientEmail: invoice.clientEmail,
+    clientName: invoice.clientName,
+    senderName,
+    invoiceNumber: invoice.invoiceNumber,
+    projectTitle: invoice.projectTitle,
+    total: formatCurrency(total, invoice.currency),
+    invoiceUrl: `${origin}/invoice/${invoice.token}`,
+  }).catch(console.error);
 
   return NextResponse.json(updated);
 }

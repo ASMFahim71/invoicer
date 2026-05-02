@@ -24,24 +24,27 @@ model User {
 }
 
 model Invoice {
-  id            String        @id @default(uuid())
-  invoiceNumber String        @unique
-  status        InvoiceStatus @default(DRAFT)
-  clientName    String
-  clientEmail   String
-  projectTitle  String
-  notes         String?
-  token         String        @unique @default(uuid())
-  taxPercent    Decimal       @default(0) @db.Decimal(5, 2)
-  dueDate       DateTime?
-  acceptedAt    DateTime?
-  userId        String
-  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items         LineItem[]
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  id                   String        @id @default(uuid())
+  invoiceNumber        String        @unique
+  status               InvoiceStatus @default(DRAFT)
+  clientName           String
+  clientEmail          String
+  projectTitle         String
+  notes                String?
+  currency             String        @default("USD")
+  token                String        @unique @default(uuid())
+  taxPercent           Decimal       @default(0) @db.Decimal(5, 2)
+  dueDate              DateTime?
+  acceptedAt           DateTime?
+  senderAgreementEmail String?
+  clientAgreementEmail String?
+  userId               String
+  user                 User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items                LineItem[]
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
 
-  @@index([userId])
+  @@index([userId, status, createdAt])
   @@index([token])
 }
 

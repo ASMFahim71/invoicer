@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { db } from "~/server/db";
 import { formatCurrency, formatDate } from "~/lib/utils";
 import { FileText } from "lucide-react";
-import { AcceptButton } from "~/components/AcceptButton";
+import { AgreementSection } from "~/components/AgreementSection";
 
 export default async function PublicInvoicePage({
   params,
@@ -256,28 +256,22 @@ export default async function PublicInvoicePage({
           )}
         </div>
 
-        {/* Accept Footer */}
+        {/* Agreement Footer */}
         {invoice.status === "SENT" && (
           <div className="border-t border-neutral-800 bg-neutral-950/50 px-6 py-8 sm:px-10">
-            <div className="mx-auto max-w-sm text-center">
-              <p className="mb-1 text-sm font-semibold text-neutral-200">
-                Ready to confirm this project?
-              </p>
-              <p className="mb-6 text-sm leading-relaxed text-neutral-500">
-                By accepting, you agree to the scope and total amount of{" "}
-                <span className="font-semibold text-white">
-                  {formatCurrency(total, invoice.currency)}
-                </span>
-                .
-              </p>
-              <AcceptButton token={token} />
-            </div>
+            <AgreementSection
+              token={token}
+              senderEmail={invoice.user.email}
+              senderName={invoice.user.agencyName ?? invoice.user.name ?? invoice.user.email}
+              clientEmail={invoice.clientEmail}
+              clientName={invoice.clientName}
+            />
           </div>
         )}
       </div>
 
       <p className="mt-8 text-center text-xs text-neutral-700">
-        Powered by invoicer · {new Date().getFullYear()}
+        Powered by nanitex.com &nbsp;·&nbsp; {new Date().getFullYear()}
       </p>
     </div>
   );

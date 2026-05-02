@@ -144,6 +144,8 @@ exports.Prisma.InvoiceScalarFieldEnum = {
   taxPercent: 'taxPercent',
   dueDate: 'dueDate',
   acceptedAt: 'acceptedAt',
+  senderAgreementEmail: 'senderAgreementEmail',
+  clientAgreementEmail: 'clientAgreementEmail',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

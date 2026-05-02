@@ -64,6 +64,7 @@ export async function PUT(
 
   const existing = await db.invoice.findFirst({
     where: { id, userId: user.id },
+    select: { status: true },
   });
 
   if (!existing) {
@@ -123,15 +124,13 @@ export async function DELETE(
 
   const { id } = await params;
 
-  const existing = await db.invoice.findFirst({
+  const { count } = await db.invoice.deleteMany({
     where: { id, userId: user.id },
   });
 
-  if (!existing) {
+  if (count === 0) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-
-  await db.invoice.delete({ where: { id } });
 
   return NextResponse.json({ success: true });
 }
