@@ -14,7 +14,7 @@ export async function POST(
 ) {
   const { token } = await params;
 
-  const body = await request.json().catch(() => ({}));
+  const body: unknown = await request.json().catch(() => ({}));
   const parsed = acceptSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
