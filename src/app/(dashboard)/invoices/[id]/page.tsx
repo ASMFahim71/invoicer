@@ -72,6 +72,9 @@ export default async function InvoiceDetailPage({
             {invoice.acceptedAt && (
               <> &middot; Accepted {formatDate(invoice.acceptedAt)}</>
             )}
+            {invoice.paidAt && (
+              <> &middot; Paid {formatDate(invoice.paidAt)}</>
+            )}
           </p>
         </div>
 

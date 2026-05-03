@@ -36,6 +36,8 @@ model Invoice {
     taxPercent    Decimal       @default(0) @db.Decimal(5, 2)
     dueDate       DateTime?
     acceptedAt            DateTime?
+    paidAt                DateTime?
+    paymentNote           String?
     senderAgreementEmail  String?
     clientAgreementEmail  String?
     userId        String
@@ -63,4 +65,5 @@ enum InvoiceStatus {
     DRAFT
     SENT
     ACCEPTED
+    PAID
 }

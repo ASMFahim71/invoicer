@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { db } from "~/server/db";
 import { formatCurrency, formatDate } from "~/lib/utils";
-import { FileText } from "lucide-react";
+import { FileText, CheckCircle2 } from "lucide-react";
 import { AgreementSection } from "~/components/AgreementSection";
 
 export default async function PublicInvoicePage({
@@ -46,11 +46,20 @@ export default async function PublicInvoicePage({
       <div className="mx-auto max-w-3xl overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900 shadow-2xl shadow-black/60">
 
         {/* Status Banners */}
+        {invoice.status === "PAID" && (
+          <div className="flex items-center justify-center gap-3 border-b border-emerald-900/60 bg-emerald-950/80 px-6 py-4">
+            <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-400" />
+            <div className="text-center">
+              <p className="text-sm font-semibold text-emerald-300">Payment Received</p>
+              <p className="text-xs text-emerald-500">Paid on {formatDate(invoice.paidAt)}</p>
+            </div>
+          </div>
+        )}
         {invoice.status === "ACCEPTED" && (
           <div className="flex items-center justify-center gap-2 border-b border-green-900/60 bg-green-950/70 px-6 py-3">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-green-400" />
             <p className="text-sm font-medium text-green-300">
-              Accepted on {formatDate(invoice.acceptedAt)}
+              Accepted on {formatDate(invoice.acceptedAt)} &middot; Awaiting payment
             </p>
           </div>
         )}
@@ -234,9 +243,9 @@ export default async function PublicInvoicePage({
               <div className="my-3 h-px bg-neutral-800" />
               <div className="flex items-center justify-between">
                 <span className="text-sm font-semibold text-white">
-                  Total Due
+                  {invoice.status === "PAID" ? "Total Paid" : "Total Due"}
                 </span>
-                <span className="text-2xl font-bold tabular-nums text-indigo-400">
+                <span className={`text-2xl font-bold tabular-nums ${invoice.status === "PAID" ? "text-emerald-400" : "text-indigo-400"}`}>
                   {formatCurrency(total, invoice.currency)}
                 </span>
               </div>

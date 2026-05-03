@@ -12,6 +12,7 @@ import {
   Trash2,
   Loader2,
   ExternalLink,
+  BadgeDollarSign,
 } from "lucide-react";
 
 interface InvoiceActionsProps {
@@ -35,8 +36,11 @@ export function InvoiceActions({
   const router = useRouter();
   const [sending, setSending] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [paying, setPaying] = useState(false);
   const [copied, setCopied] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showPayForm, setShowPayForm] = useState(false);
+  const [paymentNote, setPaymentNote] = useState("");
 
   const publicUrl =
     typeof window !== "undefined"
@@ -75,6 +79,26 @@ export function InvoiceActions({
     router.refresh();
   }
 
+  async function handleMarkPaid() {
+    setPaying(true);
+    const res = await fetch(`/api/invoices/${invoiceId}/pay`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ paymentNote: paymentNote.trim() || undefined }),
+    });
+    setPaying(false);
+
+    if (!res.ok) {
+      const err: unknown = await res.json().catch(() => null);
+      alert(getErrorMessage(err) ?? "Failed to mark as paid");
+      return;
+    }
+
+    setShowPayForm(false);
+    setPaymentNote("");
+    router.refresh();
+  }
+
   async function handleCopyLink() {
     await navigator.clipboard.writeText(publicUrl);
     setCopied(true);
@@ -102,7 +126,42 @@ export function InvoiceActions({
         </button>
       )}
 
-      {status !== "ACCEPTED" && (
+      {status === "ACCEPTED" && !showPayForm && (
+        <button
+          onClick={() => setShowPayForm(true)}
+          className={`${btnBase} border-amber-700 bg-amber-950 text-amber-300 hover:bg-amber-900 hover:text-amber-200`}
+        >
+          <BadgeDollarSign className="h-4 w-4" />
+          Mark as Paid
+        </button>
+      )}
+
+      {showPayForm && (
+        <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-800 bg-amber-950 px-3 py-2">
+          <input
+            type="text"
+            value={paymentNote}
+            onChange={(e) => setPaymentNote(e.target.value)}
+            placeholder="Payment note (optional)"
+            className="w-40 rounded bg-amber-900/60 px-2 py-1 text-sm text-amber-100 placeholder-amber-600 outline-none focus:ring-1 focus:ring-amber-600"
+          />
+          <button
+            onClick={handleMarkPaid}
+            disabled={paying}
+            className="text-sm font-semibold text-amber-300 hover:text-amber-200 disabled:opacity-60"
+          >
+            {paying ? <Loader2 className="h-4 w-4 animate-spin" /> : "Confirm"}
+          </button>
+          <button
+            onClick={() => { setShowPayForm(false); setPaymentNote(""); }}
+            className="text-sm text-neutral-400 hover:text-neutral-200"
+          >
+            Cancel
+          </button>
+        </div>
+      )}
+
+      {status !== "ACCEPTED" && status !== "PAID" && (
         <Link
           href={`/invoices/${invoiceId}/edit`}
           className={btnSecondary}

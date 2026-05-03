@@ -144,6 +144,8 @@ exports.Prisma.InvoiceScalarFieldEnum = {
   taxPercent: 'taxPercent',
   dueDate: 'dueDate',
   acceptedAt: 'acceptedAt',
+  paidAt: 'paidAt',
+  paymentNote: 'paymentNote',
   senderAgreementEmail: 'senderAgreementEmail',
   clientAgreementEmail: 'clientAgreementEmail',
   userId: 'userId',
@@ -176,7 +178,8 @@ exports.Prisma.NullsOrder = {
 exports.InvoiceStatus = exports.$Enums.InvoiceStatus = {
   DRAFT: 'DRAFT',
   SENT: 'SENT',
-  ACCEPTED: 'ACCEPTED'
+  ACCEPTED: 'ACCEPTED',
+  PAID: 'PAID'
 };
 
 exports.Prisma.ModelName = {

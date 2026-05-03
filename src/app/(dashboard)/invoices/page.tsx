@@ -18,7 +18,7 @@ export default async function InvoicesPage({
 
   const { status: statusFilter } = await searchParams;
 
-  const validStatuses: InvoiceStatus[] = ["DRAFT", "SENT", "ACCEPTED"];
+  const validStatuses: InvoiceStatus[] = ["DRAFT", "SENT", "ACCEPTED", "PAID"];
   const normalizedStatus =
     statusFilter &&
     validStatuses.includes(statusFilter.toUpperCase() as InvoiceStatus)
@@ -59,7 +59,7 @@ export default async function InvoicesPage({
       acc[row.status] += row._count;
       return acc;
     },
-    { all: 0, DRAFT: 0, SENT: 0, ACCEPTED: 0 },
+    { all: 0, DRAFT: 0, SENT: 0, ACCEPTED: 0, PAID: 0 },
   );
 
   const filters = [
@@ -67,6 +67,7 @@ export default async function InvoicesPage({
     { label: "Draft", value: "draft", count: counts.DRAFT },
     { label: "Sent", value: "sent", count: counts.SENT },
     { label: "Accepted", value: "accepted", count: counts.ACCEPTED },
+    { label: "Paid", value: "paid", count: counts.PAID },
   ];
 
   return (

@@ -71,9 +71,9 @@ export async function PUT(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  if (existing.status === "ACCEPTED") {
+  if (existing.status === "ACCEPTED" || existing.status === "PAID") {
     return NextResponse.json(
-      { error: "Cannot edit an accepted invoice" },
+      { error: "Cannot edit an accepted or paid invoice" },
       { status: 400 },
     );
   }

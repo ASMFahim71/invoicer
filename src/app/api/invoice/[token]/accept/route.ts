@@ -35,7 +35,7 @@ export async function POST(
     return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
   }
 
-  if (invoice.status === "ACCEPTED") {
+  if (invoice.status === "ACCEPTED" || invoice.status === "PAID") {
     return NextResponse.json(
       { error: "Invoice already accepted" },
       { status: 400 },

@@ -19,6 +19,11 @@ const statusConfig: Record<
     className:
       "bg-green-950 text-green-300 border border-green-800",
   },
+  PAID: {
+    label: "Paid",
+    className:
+      "bg-amber-950 text-amber-300 border border-amber-800",
+  },
 };
 
 interface StatusBadgeProps {
