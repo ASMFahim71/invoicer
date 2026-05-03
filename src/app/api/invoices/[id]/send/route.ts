@@ -53,15 +53,23 @@ export async function POST(
   const total = calculateTotal(subtotal, parseFloat(invoice.taxPercent.toString()));
   const senderName = invoice.user.agencyName ?? invoice.user.name ?? invoice.user.email;
 
-  sendInvoiceSentEmail({
-    clientEmail: invoice.clientEmail,
-    clientName: invoice.clientName,
-    senderName,
-    invoiceNumber: invoice.invoiceNumber,
-    projectTitle: invoice.projectTitle,
-    total: formatCurrency(total, invoice.currency),
-    invoiceUrl: `${origin}/invoice/${invoice.token}`,
-  }).catch(console.error);
+  try {
+    await sendInvoiceSentEmail({
+      clientEmail: invoice.clientEmail,
+      clientName: invoice.clientName,
+      senderName,
+      invoiceNumber: invoice.invoiceNumber,
+      projectTitle: invoice.projectTitle,
+      total: formatCurrency(total, invoice.currency),
+      invoiceUrl: `${origin}/invoice/${invoice.token}`,
+    });
+  } catch (err) {
+    console.error("[send-invoice] email failed:", err);
+    return NextResponse.json(
+      { error: "Invoice marked as sent but email delivery failed", details: err instanceof Error ? err.message : String(err) },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json(updated);
 }
